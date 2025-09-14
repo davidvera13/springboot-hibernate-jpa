@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: hibernate-jpa
+  # generic
+  #jpa:
+  #  show-sql: true
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  # configuring h2 console
+  # http://localhost:8080/h2-console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+
+# enable logging binded values
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: TRACE
