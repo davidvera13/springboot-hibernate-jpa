@@ -6,10 +6,12 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -17,8 +19,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // we can have issues with transactions / commits
 // component scan will load DataInitializer to context and run it: entities will be created before testing
 @DataJpaTest
+@ActiveProfiles({"local"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ComponentScan(basePackages = {"eu.dreamlabs.hibernatejpa.bootstrap"})
+// we don't want spring to autoconfigure database and use h2, we want db to be configured based on profile with yaml file
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class SpringBootJpaSliceWithBootstrappingDataInitializerTest {
     @Autowired
     BookRepository bookRepository;

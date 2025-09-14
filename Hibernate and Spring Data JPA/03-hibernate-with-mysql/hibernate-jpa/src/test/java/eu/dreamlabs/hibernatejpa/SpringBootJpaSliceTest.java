@@ -6,15 +6,20 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 // load jpa context not all spring boot complete dependencies
 @DataJpaTest
+@ActiveProfiles({"local"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+// we don't want spring to autoconfigure database and use h2, we want db to be configured based on profile with yaml file
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class SpringBootJpaSliceTest {
     @Autowired
     BookRepository bookRepository;

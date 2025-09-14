@@ -4,17 +4,23 @@ import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import eu.dreamlabs.hibernatejpa.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile({"local", "default"})
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
     private final BookRepository bookRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
+        // reset on start based, triggered on profile
+        bookRepository.deleteAll();
+
         BookEntity bookDDD = new BookEntity("Domain Driven Design", "Author1", "123", "RandomHouse");
         System.out.println("Id: " + bookDDD.getId() );
+
         BookEntity savedDDD = bookRepository.save(bookDDD);
         System.out.println("Id: " + savedDDD.getId() );
 
