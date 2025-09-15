@@ -29,7 +29,7 @@ public class SpringBootJpaSliceTest {
     void testJpaTestSplice() {
         long countBefore = bookRepository.count();
         System.out.println("Number of books before: " + countBefore);
-        bookRepository.save(new BookEntity("My Book", "Author2", "1235555", "Self"));
+        bookRepository.save(new BookEntity("My Book", "1235555", "Self", null));
         long countAfter = bookRepository.count();
         System.out.println("Number of books after: " + countAfter);
 
@@ -55,7 +55,7 @@ public class SpringBootJpaSliceTest {
     @Commit
     void testJpaTestSpliceNoRollback() {
         long countBefore = bookRepository.count();
-        bookRepository.save(new BookEntity("My Book", "Author2", "1235555", "Self"));
+        bookRepository.save(new BookEntity("My Book", "1235555", "Self", null));
         long countAfter = bookRepository.count();
 
         // Expected :2L

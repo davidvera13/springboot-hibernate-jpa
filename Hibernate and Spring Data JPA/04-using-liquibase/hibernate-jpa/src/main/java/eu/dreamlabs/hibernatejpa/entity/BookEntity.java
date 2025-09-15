@@ -14,22 +14,31 @@ import java.util.Objects;
 @Getter @Setter
 public class BookEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "books_seq")
+    @SequenceGenerator(
+            name = "books_seq",
+            sequenceName = "books_seq",
+            allocationSize = 1)
     private Long id;
     private String isbn;
     private String title;
-    private String author;
     private String publisher;
+    // we don't use jpa relationship here
+    private Long authorId;
+
 
     public BookEntity(
             String title,
-            String author,
             String isbn,
-            String publisher) {
+            String publisher,
+            Long authorId) {
         this.title = title;
-        this.author = author;
         this.isbn = isbn;
         this.publisher = publisher;
+        this.authorId = authorId;
     }
 
     @Override
@@ -44,6 +53,4 @@ public class BookEntity {
     public int hashCode() {
         return id != null ? id.hashCode(): 0;
     }
-
-
 }

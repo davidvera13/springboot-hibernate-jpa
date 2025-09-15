@@ -3,10 +3,10 @@ spring:
     activate:
       #on-profile: default
       on-profile: local
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
+  #sql:
+  #  init:
+  #    mode: always
+  #    schema-locations: classpath:schema.sql
   datasource:
     url: "jdbc:mysql://localhost:3307/booksdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
     username: "booksadmin"

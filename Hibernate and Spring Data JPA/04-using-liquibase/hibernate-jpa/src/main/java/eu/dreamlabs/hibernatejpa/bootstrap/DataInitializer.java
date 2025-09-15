@@ -18,13 +18,13 @@ public class DataInitializer implements CommandLineRunner {
         // reset on start based, triggered on profile
         bookRepository.deleteAll();
 
-        BookEntity bookDDD = new BookEntity("Domain Driven Design", "Author1", "123", "RandomHouse");
+        BookEntity bookDDD = new BookEntity("Domain Driven Design", "123", "RandomHouse", null);
         System.out.println("Id: " + bookDDD.getId() );
 
         BookEntity savedDDD = bookRepository.save(bookDDD);
         System.out.println("Id: " + savedDDD.getId() );
 
-        BookEntity bookSIA = new BookEntity("Spring In Action", "Author2", "234234", "Oriely");
+        BookEntity bookSIA = new BookEntity("Spring In Action", "234234", "Oriely", null);
         BookEntity savedSIA = bookRepository.save(bookSIA);
 
         System.out.println("Id: " + savedSIA.getId() );

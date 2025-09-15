@@ -32,7 +32,7 @@ public class SpringBootJpaSliceWithBootstrappingDataInitializerTest {
     @Order(1)
     void testJpaTestSplice() {
         long countBefore = bookRepository.count();
-        bookRepository.save(new BookEntity("My Book", "Author2", "1235555", "Self"));
+        bookRepository.save(new BookEntity("My Book","1235555", "Self", null));
         long countAfter = bookRepository.count();
 
         // now we use component scan to run bootstrap
@@ -58,7 +58,7 @@ public class SpringBootJpaSliceWithBootstrappingDataInitializerTest {
     @Commit
     void testJpaTestSpliceNoRollback() {
         long countBefore = bookRepository.count();
-        bookRepository.save(new BookEntity("My Book", "Author2", "1235555", "Self"));
+        bookRepository.save(new BookEntity("My Book", "1235555", "Self", null));
         long countAfter = bookRepository.count();
         assertThat(countBefore).isLessThan(countAfter);
         assertThat(countAfter).isEqualTo(countBefore + 1);

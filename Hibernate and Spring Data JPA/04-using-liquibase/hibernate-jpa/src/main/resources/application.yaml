@@ -8,10 +8,10 @@ spring:
   profiles:
     active: local
   # init db using hibernate and  sql script
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
+  #sql:
+  #  init:
+  #    mode: always
+  #    schema-locations: classpath:schema.sql
   jpa:
     database: mysql
     hibernate:
@@ -35,6 +35,11 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+  liquibase:
+    user: "booksadmin"
+    password: "password"
+    change-log: classpath:/db/changelog/changelog-master.xml
 
 
 # enable logging binded values
