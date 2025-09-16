@@ -1,0 +1,24 @@
+DROP DATABASE IF EXISTS booksdb;
+
+DROP USER IF EXISTS 'booksadmin'@'%';
+DROP USER IF EXISTS 'booksuser'@'%';
+
+CREATE DATABASE iF NOT EXISTS booksdb
+       CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'booksadmin'@'%' IDENTIFIED BY 'password';
+CREATE USER IF NOT EXISTS 'booksuser'@'%' IDENTIFIED BY 'password';
+
+-- Create a user with full access
+GRANT
+SELECT, INSERT, UPDATE, DELETE, CREATE, DROP,
+    REFERENCES, INDEX, ALTER, EXECUTE, CREATE VIEW, SHOW VIEW,
+    CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER
+ON booksdb.* TO 'booksadmin'@'%';
+FLUSH PRIVILEGES;
+
+-- Grant read-only access
+GRANT
+SELECT, INSERT, UPDATE, DELETE, SHOW VIEW
+ON booksdb.* TO 'booksuser'@'%';
+FLUSH PRIVILEGES;

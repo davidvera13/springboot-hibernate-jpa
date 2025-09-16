@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      #on-profile: default
+      on-profile: local
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  datasource:
+    url: "jdbc:mysql://localhost:3307/booksdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+    username: "booksadmin"
+    password: "password"
+  jpa:
+    # database: mysql
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: validate
+      #ddl-auto: update
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+          #auto: update
