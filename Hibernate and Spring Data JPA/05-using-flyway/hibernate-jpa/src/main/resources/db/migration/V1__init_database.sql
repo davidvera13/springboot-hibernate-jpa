@@ -1,8 +1,8 @@
--- executed each time --
 drop table if exists books;
 drop table if exists books_seq;
 
-create table books (
+create table books
+(
     id bigint not null,
     author varchar(255),
     isbn varchar(255),
@@ -11,7 +11,8 @@ create table books (
     primary key (id)
 ) engine=InnoDB;
 
-create table books_seq (
+create table books_seq
+(
     next_val bigint
 ) engine=InnoDB;
 
