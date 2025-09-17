@@ -1,0 +1,23 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+  datasource:
+    url: "jdbc:mysql://localhost:3307/booksdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+    username: "booksuser"
+    password: "password"
+
+  flyway:
+    enabled: true
+    url: "jdbc:mysql://localhost:3307/booksdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+    user: "booksadmin"
+    password: "password"
