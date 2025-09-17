@@ -1,7 +1,11 @@
 package eu.dreamlabs.hibernatejpa.bootstrap;
 
+import eu.dreamlabs.hibernatejpa.entity.AuthorsUuidEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
+import eu.dreamlabs.hibernatejpa.entity.BooksUuidEntity;
+import eu.dreamlabs.hibernatejpa.repository.AuthorUuidRepository;
 import eu.dreamlabs.hibernatejpa.repository.BookRepository;
+import eu.dreamlabs.hibernatejpa.repository.BookUuidRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -12,6 +16,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
     private final BookRepository bookRepository;
+    private final AuthorUuidRepository authorUuidRepository;
+    private final BookUuidRepository bookUuidRepository;
+
 
     @Override
     public void run(String... args) {
@@ -34,5 +41,17 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("Book Title: " + book.getTitle());
         });
 
+        // create user with UUID key as string
+        AuthorsUuidEntity authorUuid = new AuthorsUuidEntity();
+        authorUuid.setFirstName("Frank");
+        authorUuid.setLastName("Herbert");
+        AuthorsUuidEntity savedAuthor = authorUuidRepository.save(authorUuid);
+        System.out.println("Saved Author UUID: " + savedAuthor.getId() );
+
+        // using UUID2
+        BooksUuidEntity bookUuid = new BooksUuidEntity();
+        bookUuid.setTitle("All About UUIDs");
+        BooksUuidEntity savedBookUuid = bookUuidRepository.save(bookUuid);
+        System.out.println("Saved Book UUID: " + savedBookUuid.getId());
     }
 }

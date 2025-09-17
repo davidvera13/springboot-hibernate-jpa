@@ -10,7 +10,11 @@ spring:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     username: sa
   flyway:
-    locations: classpath:db/migration
+    # org.springframework.dao.DataIntegrityViolationException: could not execute statement [NULL non permis pour la colonne "id"
+    # NULL not allowed for column "id"; SQL statement
+
+    locations: classpath:db/migration/common,classpath:db/migration/{vendor}
+    #locations: classpath:db/migration/common
   h2:
     console:
       enabled: true
