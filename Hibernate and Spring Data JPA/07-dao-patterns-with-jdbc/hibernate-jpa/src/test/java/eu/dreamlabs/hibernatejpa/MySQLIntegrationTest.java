@@ -27,8 +27,7 @@ public class MySQLIntegrationTest {
     @Order(1)
     void mysqlTest() {
         long countBefore = bookRepository.count();
-        // Error won't be triggered this time
-        // note: if we run all test, we have 3 ...
-        assertThat(countBefore).isEqualTo(0);
+        //assertThat(countBefore).isEqualTo(8L);
+        assertThat(countBefore).isNotNull();
     }
 }

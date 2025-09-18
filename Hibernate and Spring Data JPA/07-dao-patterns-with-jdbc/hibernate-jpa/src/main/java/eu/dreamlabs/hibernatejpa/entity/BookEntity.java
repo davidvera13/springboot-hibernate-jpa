@@ -27,19 +27,21 @@ public class BookEntity {
     private String isbn;
     private String title;
     private String publisher;
-    // we don't use jpa relationship here
-    private Long authorId;
+    //private Long authorId;
+    // we don't manage relationship here
+    @Transient
+    private AuthorEntity author;
 
 
     public BookEntity(
             String title,
             String isbn,
             String publisher,
-            Long authorId) {
+            AuthorEntity author) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
-        this.authorId = authorId;
+        this.author = author;
     }
 
     @Override

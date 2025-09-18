@@ -14,15 +14,7 @@ import java.util.Objects;
 public class AuthorEntity {
     // primary key
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GeneratedValue(
-    //        strategy = GenerationType.SEQUENCE,
-    //        generator = "authors_seq")
-    //@SequenceGenerator(
-    //        name = "authors_seq",
-    //        sequenceName = "authors_seq",
-    //        allocationSize = 1)
     private Long id;
 
     private String firstName;
