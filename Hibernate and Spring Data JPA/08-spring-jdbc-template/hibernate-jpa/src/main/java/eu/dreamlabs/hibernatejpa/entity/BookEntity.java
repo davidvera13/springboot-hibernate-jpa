@@ -16,19 +16,11 @@ public class BookEntity {
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GeneratedValue(
-    //        strategy = GenerationType.SEQUENCE,
-    //        generator = "books_seq")
-    //@SequenceGenerator(
-    //        name = "books_seq",
-    //       sequenceName = "books_seq",
-    //        allocationSize = 1)
     private Long id;
     private String isbn;
     private String title;
     private String publisher;
-    //private Long authorId;
-    // we don't manage relationship here
+    private Long authorId;
     @Transient
     private AuthorEntity author;
 

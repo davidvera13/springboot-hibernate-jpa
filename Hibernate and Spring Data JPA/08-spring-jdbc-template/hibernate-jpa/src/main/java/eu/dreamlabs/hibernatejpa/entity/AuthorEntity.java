@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +20,9 @@ public class AuthorEntity {
 
     private String firstName;
     private String lastName;
+
+    @Transient
+    private List<BookEntity> books;
 
     @Override
     public boolean equals(Object o) {
