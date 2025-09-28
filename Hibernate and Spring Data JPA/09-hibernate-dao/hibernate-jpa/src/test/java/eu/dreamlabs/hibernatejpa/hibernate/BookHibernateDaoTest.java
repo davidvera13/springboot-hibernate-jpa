@@ -1,4 +1,4 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate;
+package eu.dreamlabs.hibernatejpa.hibernate;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
@@ -10,19 +10,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles({"local"})
 @DataJpaTest
-@ComponentScan("eu.dreamlabs.hibernatejpa.jdbctemplate")
+@ComponentScan("eu.dreamlabs.hibernatejpa.hibernate")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class BookJdbcTest {
+class BookHibernateDaoTest {
     @Autowired
-    private AuthorJdbc authorJdbc;
-    
+    private BookHibernateDao bookDao;
     @Autowired
-    private BookJdbc bookJdbc;
-
+    private AuthorHibernateDao authorDao;
 
     @Test
     void createBook() {
@@ -33,19 +30,19 @@ class BookJdbcTest {
         AuthorEntity author = new AuthorEntity();
         author.setId(3L);
         entity.setAuthor(author);
-        BookEntity saved = bookJdbc.createBook(entity);
+        BookEntity saved = bookDao.createBook(entity);
         assertThat(saved).isNotNull();
     }
 
     @Test
-    void getBookById() {
-        BookEntity book = bookJdbc.getById(1L);
+    void getById() {
+        BookEntity book = bookDao.getById(1L);
         assertThat(book).isNotNull();
     }
-
+    
     @Test
-    void getBookByNamePrepStatement() {
-        BookEntity authorEntity = bookJdbc.getByTitle("Spring in Action, 5th Edition");
+    void getByTitle() {
+        BookEntity authorEntity = bookDao.getByTitle("Spring in Action, 5th Edition");
         assertThat(authorEntity).isNotNull();
     }
 
@@ -59,17 +56,16 @@ class BookJdbcTest {
         AuthorEntity author = new AuthorEntity();
         author.setId(3L);
         entity.setAuthor(author);
-        BookEntity saved = bookJdbc.createBook(entity);
+        BookEntity saved = bookDao.createBook(entity);
         assertThat(saved.getTitle()).isEqualTo("book2");
         assertThat(saved.getIsbn()).isEqualTo("123456788");
         assertThat(saved.getPublisher()).isEqualTo("publisher2");
 
-        saved.setAuthorId(1L);
         saved.setTitle("book2b");
         saved.setIsbn("123456780");
         saved.setPublisher("PUBLISHER2b");
 
-        BookEntity updated = bookJdbc.updateBook(saved);
+        BookEntity updated = bookDao.updateBook(saved);
         assertThat(updated.getTitle()).isEqualTo("book2b");
     }
 
@@ -83,12 +79,11 @@ class BookJdbcTest {
         author.setId(3L);
         entity.setAuthor(author);
 
-        BookEntity saved = bookJdbc.createBook(entity);
+        BookEntity saved = bookDao.createBook(entity);
         assertThat(saved.getTitle()).isEqualTo("book3");
         assertThat(saved.getIsbn()).isEqualTo("123456777");
 
-        bookJdbc.deleteBookById(saved.getId());
-        assertThat(bookJdbc.getById(saved.getId())).isNull();
+        bookDao.deleteBookById(saved.getId());
+        assertThat(bookDao.getById(saved.getId())).isNull();
     }
-
 }

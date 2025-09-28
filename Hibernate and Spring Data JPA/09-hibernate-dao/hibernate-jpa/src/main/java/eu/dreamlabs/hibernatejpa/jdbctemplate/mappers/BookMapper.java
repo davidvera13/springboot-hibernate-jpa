@@ -17,6 +17,6 @@ public class BookMapper implements RowMapper<BookEntity> {
         book.setPublisher(rs.getString("publisher"));
         book.setAuthorId(rs.getLong("author_id"));
 
-        return null;
+        return book;
     }
 }

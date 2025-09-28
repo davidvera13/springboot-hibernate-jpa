@@ -5,6 +5,7 @@ import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.AuthorMapper;
 import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.BookMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -16,11 +17,20 @@ public class BookJdbcImpl implements BookJdbc{
 
     @Override
     public BookEntity getById(Long id) {
-        return jdbcTemplate
-                .queryForObject(
-                        "SELECT * FROM books where id = ?",
-                        rowMapper(),
-                        id);
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM books WHERE id = ?",
+                    rowMapper(),
+                    id
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+//        return jdbcTemplate
+//                .queryForObject(
+//                        "SELECT * FROM books where id = ?",
+//                        rowMapper(),
+//                        id);
     }
 
 
@@ -37,7 +47,7 @@ public class BookJdbcImpl implements BookJdbc{
     @Override
     public BookEntity createBook(BookEntity book) {
         jdbcTemplate.update(
-                "INSERT INTO book (isbn, publisher, title, author_id) " +
+                "INSERT INTO books (isbn, publisher, title, author_id) " +
                         "VALUES (?, ?, ?, ?)",
                 book.getIsbn(),
                 book.getPublisher(),
