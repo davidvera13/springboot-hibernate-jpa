@@ -8,6 +8,20 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Objects;
 
+// if we have single query ...
+@NamedQueries({
+        @NamedQuery(
+                name = "AuthorEntity.findAll",
+                query = "FROM AuthorEntity"),
+        @NamedQuery(
+                name = "AuthorEntity.getByNameNamedQuery",
+                query = "FROM AuthorEntity auth WHERE auth.firstName = :firstName AND auth.lastName = :lastName"
+        )
+
+})
+//@NamedQuery(
+//        name = "AuthorEntity.findAll",
+//        query = "FROM AuthorEntity")
 @Entity
 @Table(name = "authors")
 @NoArgsConstructor

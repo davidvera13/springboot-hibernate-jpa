@@ -8,6 +8,16 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "BookEntity.findAll",
+                query = "FROM BookEntity "),
+        @NamedQuery(
+                name = "BookEntity.findByTitleNamedQuery",
+                query = "FROM BookEntity a WHERE a.title = :title"
+        )
+})
+
 @Entity
 @Table(name = "books")
 @NoArgsConstructor

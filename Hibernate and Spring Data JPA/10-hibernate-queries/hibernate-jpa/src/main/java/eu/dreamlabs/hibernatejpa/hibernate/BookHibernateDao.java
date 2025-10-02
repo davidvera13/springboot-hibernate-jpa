@@ -2,10 +2,17 @@ package eu.dreamlabs.hibernatejpa.hibernate;
 
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 
-public interface BookHibernateDao {
-    BookEntity getById(Long id);
+import java.util.List;
 
+public interface BookHibernateDao {
+    List<BookEntity> findAll();
+    BookEntity getById(Long id);
     BookEntity getByTitle(String title);
+    BookEntity findByTitleNamedQuery(String title);
+    BookEntity getByTitleCriteria(String title);
+    BookEntity getByTitleNativeQuery(String title);
+
+    BookEntity findByISBN(String isbn);
 
     BookEntity createBook(BookEntity book);
 

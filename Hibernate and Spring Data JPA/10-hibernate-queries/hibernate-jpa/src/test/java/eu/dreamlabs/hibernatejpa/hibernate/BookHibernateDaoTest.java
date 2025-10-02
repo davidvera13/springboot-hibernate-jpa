@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ActiveProfiles({"local"})
@@ -35,14 +37,45 @@ class BookHibernateDaoTest {
     }
 
     @Test
+    void findAll() {
+        List<BookEntity> books = bookDao.findAll();
+        assertThat(books).isNotNull();
+        assertThat(books.size()).isGreaterThan(0);
+    }
+
+    @Test
     void getById() {
         BookEntity book = bookDao.getById(1L);
+        assertThat(book).isNotNull();
+    }
+
+    @Test
+    void findByISBN() {
+        BookEntity book = bookDao.findByISBN("978-1617294945");
         assertThat(book).isNotNull();
     }
     
     @Test
     void getByTitle() {
         BookEntity authorEntity = bookDao.getByTitle("Spring in Action, 5th Edition");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void findByTitleNamedQuery() {
+        BookEntity authorEntity = bookDao.findByTitleNamedQuery("Spring in Action, 5th Edition");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByTitleCriteria() {
+        BookEntity authorEntity = bookDao.getByTitleCriteria("Spring in Action, 5th Edition");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByTitleNativeQuery() {
+        BookEntity authorEntity = bookDao.getByTitleNativeQuery("Spring in Action, 5th Edition");
         assertThat(authorEntity).isNotNull();
     }
 

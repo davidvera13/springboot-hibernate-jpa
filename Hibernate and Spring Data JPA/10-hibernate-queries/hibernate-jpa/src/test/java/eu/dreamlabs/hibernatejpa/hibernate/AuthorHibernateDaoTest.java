@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,6 +35,13 @@ class AuthorHibernateDaoTest {
     }
 
     @Test
+    void findAll() {
+        List<AuthorEntity> authors = authorDao.findAll();
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
+
+    @Test
     void getAuthorById() {
         AuthorEntity authorEntity = authorDao.getById(1L);
         assertThat(authorEntity).isNotNull();
@@ -43,6 +52,31 @@ class AuthorHibernateDaoTest {
     void getAuthorByName() {
         AuthorEntity authorEntity = authorDao.getByName("Craig", "Walls");
         assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByNameNamedQuery() {
+        AuthorEntity authorEntity = authorDao.getByNameNamedQuery("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByNameCriteria() {
+        AuthorEntity authorEntity = authorDao.getByNameCriteria("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByNameNativeQuery() {
+        AuthorEntity authorEntity = authorDao.getByNameNativeQuery("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void listAuthorByLastNameLike() {
+        List<AuthorEntity> authors = authorDao.listAuthorByLastNameLike("Wall");
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
     }
 
     @Test
