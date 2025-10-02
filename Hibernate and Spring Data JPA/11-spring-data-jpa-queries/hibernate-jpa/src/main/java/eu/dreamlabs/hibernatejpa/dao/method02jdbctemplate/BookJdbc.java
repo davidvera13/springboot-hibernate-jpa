@@ -1,8 +1,8 @@
-package eu.dreamlabs.hibernatejpa.dao;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate;
 
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 
-public interface BookDao {
+public interface BookJdbc {
     BookEntity getById(Long id);
 
     BookEntity getByTitle(String title);

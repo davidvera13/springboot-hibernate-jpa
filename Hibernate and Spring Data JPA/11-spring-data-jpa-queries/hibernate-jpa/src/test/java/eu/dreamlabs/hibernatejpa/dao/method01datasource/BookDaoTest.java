@@ -1,4 +1,4 @@
-package eu.dreamlabs.hibernatejpa.hibernate;
+package eu.dreamlabs.hibernatejpa.dao.method01datasource;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
@@ -9,19 +9,17 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ActiveProfiles({"local"})
 @DataJpaTest
-@ComponentScan("eu.dreamlabs.hibernatejpa.hibernate")
+@ComponentScan("eu.dreamlabs.hibernatejpa.dao")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class BookHibernateDaoTest {
+class BookDaoTest {
     @Autowired
-    private BookHibernateDao bookDao;
+    private BookDao bookDao;
     @Autowired
-    private AuthorHibernateDao authorDao;
+    private AuthorDao authorDao;
 
     @Test
     void createBook() {
@@ -37,51 +35,20 @@ class BookHibernateDaoTest {
     }
 
     @Test
-    void findAll() {
-        List<BookEntity> books = bookDao.findAll();
-        assertThat(books).isNotNull();
-        assertThat(books.size()).isGreaterThan(0);
-    }
-
-    @Test
-    void getById() {
+    void getAuthorById() {
         BookEntity book = bookDao.getById(1L);
         assertThat(book).isNotNull();
     }
 
     @Test
-    void findByISBN() {
-        BookEntity book = bookDao.findByISBN("978-1617294945");
-        assertThat(book).isNotNull();
-    }
-    
-    @Test
-    void getByTitle() {
+    void getAuthorByNamePrepStatement() {
         BookEntity authorEntity = bookDao.getByTitle("Spring in Action, 5th Edition");
         assertThat(authorEntity).isNotNull();
     }
 
-    @Test
-    void findByTitleNamedQuery() {
-        BookEntity authorEntity = bookDao.findByTitleNamedQuery("Spring in Action, 5th Edition");
-        assertThat(authorEntity).isNotNull();
-    }
 
     @Test
-    void getByTitleCriteria() {
-        BookEntity authorEntity = bookDao.getByTitleCriteria("Spring in Action, 5th Edition");
-        assertThat(authorEntity).isNotNull();
-    }
-
-    @Test
-    void getByTitleNativeQuery() {
-        BookEntity authorEntity = bookDao.getByTitleNativeQuery("Spring in Action, 5th Edition");
-        assertThat(authorEntity).isNotNull();
-    }
-
-
-    @Test
-    void updateBook() {
+    void updateAuthor() {
         BookEntity entity = new BookEntity();
         entity.setTitle("book2");
         entity.setIsbn("123456788");
@@ -119,4 +86,5 @@ class BookHibernateDaoTest {
         bookDao.deleteBookById(saved.getId());
         assertThat(bookDao.getById(saved.getId())).isNull();
     }
+
 }

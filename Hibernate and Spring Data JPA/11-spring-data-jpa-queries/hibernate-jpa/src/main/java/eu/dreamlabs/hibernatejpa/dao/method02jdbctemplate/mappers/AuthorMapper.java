@@ -1,4 +1,4 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate.mappers;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.mappers;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;

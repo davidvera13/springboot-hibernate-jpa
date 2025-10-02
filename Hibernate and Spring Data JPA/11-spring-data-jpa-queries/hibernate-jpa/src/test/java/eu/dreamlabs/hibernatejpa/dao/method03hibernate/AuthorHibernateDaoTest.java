@@ -1,5 +1,6 @@
-package eu.dreamlabs.hibernatejpa.dao;
+package eu.dreamlabs.hibernatejpa.dao.method03hibernate;
 
+import eu.dreamlabs.hibernatejpa.dao.method03hibernate.AuthorHibernateDao;
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,26 +9,35 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.atIndex;
 
 @ActiveProfiles({"local"})
 @DataJpaTest
-@ComponentScan("eu.dreamlabs.hibernatejpa.dao")
-// required to compile application for older versions ...
-//@Import(AuthorDaoImpl.class)
+@ComponentScan("eu.dreamlabs.hibernatejpa.method03hibernate")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AuthorDaoTest {
+class AuthorHibernateDaoTest {
     @Autowired
-    private AuthorDao authorDao;
-
+    AuthorHibernateDao authorDao;
+    
     @Test
     void createAuthor() {
         AuthorEntity entity = new AuthorEntity();
         entity.setFirstName("John");
         entity.setLastName("Doe");
         AuthorEntity savedAuthor = authorDao.createAuthor(entity);
+        System.out.println(savedAuthor.getId());
+        System.out.println(savedAuthor.getFirstName() + " " + savedAuthor.getLastName());
         assertThat(savedAuthor).isNotNull();
+        assertThat(savedAuthor.getId()).isNotNull();
+    }
+
+    @Test
+    void findAll() {
+        List<AuthorEntity> authors = authorDao.findAll();
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
     }
 
     @Test
@@ -36,18 +46,37 @@ class AuthorDaoTest {
         assertThat(authorEntity).isNotNull();
     }
 
-    @Test
-    void getAuthorByIdPrepStatement() {
-        AuthorEntity authorEntity = authorDao.getByIdPrepStatement(1L);
-        assertThat(authorEntity).isNotNull();
-    }
 
     @Test
-    void getAuthorByNamePrepStatement() {
+    void getAuthorByName() {
         AuthorEntity authorEntity = authorDao.getByName("Craig", "Walls");
         assertThat(authorEntity).isNotNull();
     }
 
+    @Test
+    void getByNameNamedQuery() {
+        AuthorEntity authorEntity = authorDao.getByNameNamedQuery("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByNameCriteria() {
+        AuthorEntity authorEntity = authorDao.getByNameCriteria("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void getByNameNativeQuery() {
+        AuthorEntity authorEntity = authorDao.getByNameNativeQuery("Craig", "Walls");
+        assertThat(authorEntity).isNotNull();
+    }
+
+    @Test
+    void listAuthorByLastNameLike() {
+        List<AuthorEntity> authors = authorDao.listAuthorByLastNameLike("Wall");
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
 
     @Test
     void updateAuthor() {
@@ -64,7 +93,6 @@ class AuthorDaoTest {
         AuthorEntity updated = authorDao.updateAuthor(savedAuthor);
         assertThat(updated.getFirstName()).isEqualTo("Fox");
         assertThat(updated.getLastName()).isEqualTo("Mulder");
-
     }
 
     @Test
@@ -76,9 +104,8 @@ class AuthorDaoTest {
         assertThat(savedAuthor.getFirstName()).isEqualTo("John");
         assertThat(savedAuthor.getLastName()).isEqualTo("Wick");
 
-
         authorDao.deleteAuthor(savedAuthor.getId());
-        assertThat(authorDao.getById(savedAuthor.getId())).isNull();
+        AuthorEntity deleted = authorDao.getById(savedAuthor.getId());
+        assertThat(deleted).isNull();
     }
-
 }

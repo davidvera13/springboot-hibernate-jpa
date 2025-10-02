@@ -1,5 +1,7 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate;
 
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.AuthorJdbc;
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.BookJdbc;
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import org.junit.jupiter.api.Test;
@@ -10,11 +12,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles({"local"})
 @DataJpaTest
-@ComponentScan("eu.dreamlabs.hibernatejpa.jdbctemplate")
+@ComponentScan("eu.dreamlabs.hibernatejpa.method02jdbctemplate")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class BookJdbcTest {
     @Autowired

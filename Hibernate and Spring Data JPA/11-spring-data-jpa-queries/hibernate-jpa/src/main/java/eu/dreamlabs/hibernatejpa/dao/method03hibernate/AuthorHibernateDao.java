@@ -1,4 +1,4 @@
-package eu.dreamlabs.hibernatejpa.hibernate;
+package eu.dreamlabs.hibernatejpa.dao.method03hibernate;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 

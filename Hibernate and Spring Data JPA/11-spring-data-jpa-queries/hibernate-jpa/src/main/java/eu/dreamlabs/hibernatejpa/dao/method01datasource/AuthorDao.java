@@ -1,12 +1,12 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate;
+package eu.dreamlabs.hibernatejpa.dao.method01datasource;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 
-public interface AuthorJdbc {
+public interface AuthorDao {
     AuthorEntity createAuthor(AuthorEntity entity);
 
     AuthorEntity getById(Long id);
-    AuthorEntity getByIdWithBooks(Long id);
+    AuthorEntity getByIdPrepStatement(Long id);
     AuthorEntity getByName(String firstName, String lastName);
 
     AuthorEntity updateAuthor(AuthorEntity entity);

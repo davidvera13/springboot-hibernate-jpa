@@ -1,7 +1,7 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate.extractors;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.extractors;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
-import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.AuthorMapper;
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.mappers.AuthorMapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 

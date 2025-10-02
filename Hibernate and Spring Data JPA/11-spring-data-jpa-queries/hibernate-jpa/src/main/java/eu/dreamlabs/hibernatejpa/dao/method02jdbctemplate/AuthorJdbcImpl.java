@@ -1,8 +1,8 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate;
 
 import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
-import eu.dreamlabs.hibernatejpa.jdbctemplate.extractors.AuthorExtractor;
-import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.AuthorMapper;
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.extractors.AuthorExtractor;
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.mappers.AuthorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

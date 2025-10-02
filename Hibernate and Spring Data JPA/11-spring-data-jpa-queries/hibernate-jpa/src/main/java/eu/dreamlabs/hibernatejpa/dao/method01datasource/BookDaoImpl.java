@@ -1,4 +1,4 @@
-package eu.dreamlabs.hibernatejpa.dao;
+package eu.dreamlabs.hibernatejpa.dao.method01datasource;
 
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import lombok.RequiredArgsConstructor;

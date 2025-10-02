@@ -1,6 +1,5 @@
-package eu.dreamlabs.hibernatejpa.hibernate;
+package eu.dreamlabs.hibernatejpa.dao.method03hibernate;
 
-import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,7 +9,6 @@ import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Component

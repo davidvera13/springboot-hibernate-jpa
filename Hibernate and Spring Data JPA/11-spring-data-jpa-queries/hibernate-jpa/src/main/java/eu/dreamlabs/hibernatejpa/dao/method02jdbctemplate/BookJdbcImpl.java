@@ -1,9 +1,7 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate;
 
-import eu.dreamlabs.hibernatejpa.entity.AuthorEntity;
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
-import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.AuthorMapper;
-import eu.dreamlabs.hibernatejpa.jdbctemplate.mappers.BookMapper;
+import eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.mappers.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

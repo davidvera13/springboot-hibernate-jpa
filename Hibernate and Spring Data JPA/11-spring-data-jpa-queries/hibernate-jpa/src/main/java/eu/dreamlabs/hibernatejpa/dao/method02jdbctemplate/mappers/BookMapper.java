@@ -1,9 +1,8 @@
-package eu.dreamlabs.hibernatejpa.jdbctemplate.mappers;
+package eu.dreamlabs.hibernatejpa.dao.method02jdbctemplate.mappers;
 
 import eu.dreamlabs.hibernatejpa.entity.BookEntity;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.awt.print.Book;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
